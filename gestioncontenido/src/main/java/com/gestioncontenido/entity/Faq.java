@@ -2,6 +2,7 @@ package com.gestioncontenido.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "faqs")
@@ -17,4 +18,10 @@ public class Faq {
     private String pregunta;
     private String respuesta;
     private boolean visible = true;
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

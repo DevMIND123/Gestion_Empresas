@@ -1,6 +1,7 @@
 package com.gestioncontenido.dto;
 
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -11,4 +12,5 @@ public class FaqDTO {
     private String pregunta;
     private String respuesta;
     private boolean visible;
+    private LocalDateTime createdAt;
 }

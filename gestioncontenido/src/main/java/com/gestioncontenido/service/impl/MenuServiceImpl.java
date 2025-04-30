@@ -37,7 +37,6 @@ public class MenuServiceImpl implements MenuService {
                 .id(menu.getId())
                 .titulo(menu.getTitulo())
                 .descripcion(menu.getDescripcion())
-                .visible(menu.isVisible())
                 .build();
     }
 }

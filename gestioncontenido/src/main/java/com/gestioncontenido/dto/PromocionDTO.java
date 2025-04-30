@@ -3,6 +3,7 @@ package com.gestioncontenido.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -15,4 +16,6 @@ public class PromocionDTO {
     private double porcentajeDescuento;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private boolean isActive;
+    private LocalDateTime createdAt;
 }

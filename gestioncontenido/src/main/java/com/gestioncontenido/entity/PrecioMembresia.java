@@ -2,6 +2,7 @@ package com.gestioncontenido.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "precios_membresia")
@@ -20,4 +21,11 @@ public class PrecioMembresia {
     private double precio;
 
     private String descripcion;
+  
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

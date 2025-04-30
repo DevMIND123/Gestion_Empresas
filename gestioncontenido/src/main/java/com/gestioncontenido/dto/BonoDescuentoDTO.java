@@ -3,6 +3,7 @@ package com.gestioncontenido.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -13,4 +14,6 @@ public class BonoDescuentoDTO {
     private String nombre;
     private double valor;
     private LocalDate fechaExpiracion;
+    private boolean isActive;
+    private LocalDateTime createdAt;
 }

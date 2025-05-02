@@ -21,6 +21,6 @@ services:
       - devNetworkArq
     restart: unless-stopped
 
-network:
+networks:
   devNetworkArq:
     external: true

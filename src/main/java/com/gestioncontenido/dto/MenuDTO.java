@@ -11,6 +11,5 @@ public class MenuDTO {
     private Long id;
     private String titulo;
     private String descripcion;
-    private boolean visible;
     private LocalDateTime createdAt;
 }

@@ -2,8 +2,6 @@
 
 Este microservicio forma parte de un sistema distribuido y está diseñado para **administrar y modificar el contenido de una página web**. Permite gestionar menús, ubicaciones, promociones, precios, preguntas frecuentes, y más, a través de endpoints RESTful.
 
-> ⚠️ **Este proyecto se encuentra en etapa de desarrollo**. No es apto para entornos de producción, ya que las credenciales de la base de datos están actualmente **públicas y hardcodeadas** tanto en `docker-compose.yml` como en `application.properties`.
-
 ## 🚀 Tecnologías
 
 - Java 17+

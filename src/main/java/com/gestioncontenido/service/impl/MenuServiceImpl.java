@@ -18,7 +18,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDTO> listarMenus() {
-        return menuRepository.findByVisibleTrue().stream()
+        return menuRepository.findAll().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }

@@ -17,6 +17,7 @@ public class Faq {
 
     private String pregunta;
     private String respuesta;
+    @Builder.Default
     private boolean visible = true;
     private LocalDateTime createdAt;
 

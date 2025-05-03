@@ -2,13 +2,12 @@
 
 Este microservicio forma parte de un sistema distribuido y está diseñado para **administrar y modificar el contenido de una página web**. Permite gestionar menús, ubicaciones, promociones, precios, preguntas frecuentes, y más, a través de endpoints RESTful.
 
-## 🚀 Tecnologías
+## 🚀 Requisitos previos
 
-- Java 17+
-- Spring Boot 3.x
-- PostgreSQL (Docker)
-- Maven
-- Docker Compose (para base de datos)
+- Tener instalado **Java** (versión requerida por el proyecto)
+- Tener instalado **Maven**
+- Clonar este repositorio
+- Asegurarse de tener el archivo **.env** en el directorio raíz del proyecto, el cual contiene las variables de entorno necesarias para la conexión a la base de datos y configuraciones relacionadas con JWT.
 
 ## 🧩 Funcionalidades principales
 

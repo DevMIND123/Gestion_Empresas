@@ -1,18 +1,26 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:13
-    container_name: gestioncontenido-postgres
-    restart: always
+  gestion-contenido:
+    build:
+      context: .
+    container_name: gestion_contenido
     ports:
-      - "5432:5432"
+      - "8080:8080"
     environment:
-      POSTGRES_DB: gestion_contenido
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - SPRING_JPA_DDL_AUTO=${SPRING_JPA_DDL_AUTO}
+      - SPRING_JPA_SHOW_SQL=${SPRING_JPA_SHOW_SQL}
+      - SPRING_JPA_DIALECT=${SPRING_JPA_DIALECT}
+      - SPRING_JPA_FORMAT=${SPRING_JPA_FORMAT}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./.env:/app/.env
+    networks:
+      - devNetworkArq
+    restart: unless-stopped
 
-volumes:
-  postgres_data:
+networks:
+  devNetworkArq:
+    external: true

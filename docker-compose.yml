@@ -1,27 +1,37 @@
 version: '3.8'
 
 services:
-  gestion-contenido:
+  postgres:
+    image: postgres:13
+    container_name: gestioncontenido-postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: retochimba_db
+      POSTGRES_USER: local_user
+      POSTGRES_PASSWORD: password123
+    volumes:
+      - gestioncontenido_postgres_data:/var/lib/postgresql/data
+    networks:
+      - gestioncontenido-network
+
+  backend:
+    container_name: gestioncontenido-backend
     build:
       context: .
-    container_name: gestion_contenido
     ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-      - SPRING_JPA_DDL_AUTO=${SPRING_JPA_DDL_AUTO}
-      - SPRING_JPA_SHOW_SQL=${SPRING_JPA_SHOW_SQL}
-      - SPRING_JPA_DIALECT=${SPRING_JPA_DIALECT}
-      - SPRING_JPA_FORMAT=${SPRING_JPA_FORMAT}
-      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
-    volumes:
-      - ./.env:/app/.env
+      - '8080:8080'
+    env_file:
+      - .env
+    depends_on:
+      - postgres
     networks:
-      - devNetworkArq
-    restart: unless-stopped
+      - gestioncontenido-network
+
+volumes:
+  gestioncontenido_postgres_data:
 
 networks:
-  devNetworkArq:
-    external: true
+  gestioncontenido-network:
+    driver: bridge

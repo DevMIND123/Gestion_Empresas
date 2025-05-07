@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  gestion-contenido:
+    build:
+      context: .
+    container_name: gestion_contenido
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - SPRING_JPA_DDL_AUTO=${SPRING_JPA_DDL_AUTO}
+      - SPRING_JPA_SHOW_SQL=${SPRING_JPA_SHOW_SQL}
+      - SPRING_JPA_DIALECT=${SPRING_JPA_DIALECT}
+      - SPRING_JPA_FORMAT=${SPRING_JPA_FORMAT}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+    volumes:
+      - ./.env:/app/.env
+    networks:
+      - devNetworkArq
+    restart: unless-stopped
+
+networks:
+  devNetworkArq:
+    external: true

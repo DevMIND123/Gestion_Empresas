@@ -4,6 +4,7 @@ import com.gestioncontenido.dto.PrecioMembresiaDTO;
 import com.gestioncontenido.entity.PrecioMembresia;
 import com.gestioncontenido.repository.PrecioMembresiaRepository;
 import com.gestioncontenido.service.impl.PrecioMembresiaServiceImpl;
+import com.gestioncontenido.exception.ResourceNotFoundException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,7 @@ public class PrecioMembresiaServiceImplTest {
     void testListar() {
         PrecioMembresia entidad = PrecioMembresia.builder()
                 .id(1L).tipo("Premium").precio(29.99).descripcion("Acceso completo").build();
+
         when(repository.findAll()).thenReturn(List.of(entidad));
 
         List<PrecioMembresiaDTO> resultado = service.listar();
@@ -46,6 +48,7 @@ public class PrecioMembresiaServiceImplTest {
 
         PrecioMembresia entidadGuardada = PrecioMembresia.builder()
                 .id(1L).tipo("Básico").precio(9.99).descripcion("Acceso limitado").build();
+
 
         when(repository.save(any(PrecioMembresia.class))).thenReturn(entidadGuardada);
 
@@ -82,7 +85,8 @@ public class PrecioMembresiaServiceImplTest {
 
         when(repository.findById(id)).thenReturn(Optional.empty());
 
-        RuntimeException ex = assertThrows(RuntimeException.class, () -> service.editar(id, dto));
+
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class, () -> service.editar(id, dto));
         assertEquals("Precio no encontrado", ex.getMessage());
     }
 

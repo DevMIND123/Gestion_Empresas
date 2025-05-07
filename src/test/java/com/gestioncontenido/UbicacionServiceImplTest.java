@@ -4,6 +4,8 @@ import com.gestioncontenido.dto.UbicacionDTO;
 import com.gestioncontenido.entity.Ubicacion;
 import com.gestioncontenido.repository.UbicacionRepository;
 import com.gestioncontenido.service.impl.UbicacionServiceImpl;
+import com.gestioncontenido.exception.ResourceNotFoundException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -80,7 +82,7 @@ public class UbicacionServiceImplTest {
 
         when(ubicacionRepository.findById(id)).thenReturn(Optional.empty());
 
-        RuntimeException ex = assertThrows(RuntimeException.class,
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class,
                 () -> ubicacionService.actualizarUbicacion(id, dto));
 
         assertEquals("Ubicación no encontrada", ex.getMessage());

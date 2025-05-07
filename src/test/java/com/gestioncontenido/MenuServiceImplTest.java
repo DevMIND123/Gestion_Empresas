@@ -8,6 +8,7 @@ import com.gestioncontenido.dto.MenuDTO;
 import com.gestioncontenido.entity.Menu;
 import com.gestioncontenido.repository.MenuRepository;
 import com.gestioncontenido.service.impl.MenuServiceImpl;
+import com.gestioncontenido.exception.ResourceNotFoundException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,7 +84,7 @@ public class MenuServiceImplTest {
         when(menuRepository.findById(id)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(RuntimeException.class, () -> menuService.actualizarMenu(id, menuDTO));
+        assertThrows(ResourceNotFoundException.class, () -> menuService.actualizarMenu(id, menuDTO));
         verify(menuRepository, never()).save(any());
     }
 

@@ -4,6 +4,8 @@ import com.gestioncontenido.dto.PromocionDTO;
 import com.gestioncontenido.entity.Promocion;
 import com.gestioncontenido.repository.PromocionRepository;
 import com.gestioncontenido.service.impl.PromocionServiceImpl;
+import com.gestioncontenido.exception.ResourceNotFoundException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -33,7 +35,7 @@ public class PromocionServiceImplTest {
                 .id(1L)
                 .nombre("Promo 1")
                 .descripcion("Descuento")
-                .porcentajeDescuento(20)
+                .porcentajeDescuento(20.0)
                 .fechaInicio(LocalDate.now())
                 .fechaFin(LocalDate.now().plusDays(10))
                 .build();
@@ -50,7 +52,7 @@ public class PromocionServiceImplTest {
         PromocionDTO dto = PromocionDTO.builder()
                 .nombre("Nueva Promo")
                 .descripcion("Descripción")
-                .porcentajeDescuento(15)
+                .porcentajeDescuento(15.0)
                 .fechaInicio(LocalDate.now())
                 .fechaFin(LocalDate.now().plusDays(5))
                 .build();
@@ -59,7 +61,7 @@ public class PromocionServiceImplTest {
                 .id(1L)
                 .nombre("Nueva Promo")
                 .descripcion("Descripción")
-                .porcentajeDescuento(15)
+                .porcentajeDescuento(15.0)
                 .fechaInicio(dto.getFechaInicio())
                 .fechaFin(dto.getFechaFin())
                 .build();
@@ -79,7 +81,7 @@ public class PromocionServiceImplTest {
                 .id(id)
                 .nombre("Vieja")
                 .descripcion("Vieja desc")
-                .porcentajeDescuento(10)
+                .porcentajeDescuento(10.0)
                 .fechaInicio(LocalDate.now())
                 .fechaFin(LocalDate.now().plusDays(5))
                 .build();
@@ -87,7 +89,7 @@ public class PromocionServiceImplTest {
         PromocionDTO dtoEditado = PromocionDTO.builder()
                 .nombre("Editado")
                 .descripcion("Nueva desc")
-                .porcentajeDescuento(25)
+                .porcentajeDescuento(25.0)
                 .fechaInicio(LocalDate.now())
                 .fechaFin(LocalDate.now().plusDays(7))
                 .build();
@@ -107,14 +109,13 @@ public class PromocionServiceImplTest {
         PromocionDTO dto = PromocionDTO.builder()
                 .nombre("No importa")
                 .descripcion("Tampoco")
-                .porcentajeDescuento(5)
+                .porcentajeDescuento(5.0)
                 .fechaInicio(LocalDate.now())
                 .fechaFin(LocalDate.now().plusDays(1))
                 .build();
 
         when(promocionRepository.findById(id)).thenReturn(Optional.empty());
-
-        RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
+        ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
             promocionService.editar(id, dto);
         });
 

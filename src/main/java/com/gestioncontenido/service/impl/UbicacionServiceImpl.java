@@ -4,6 +4,8 @@ import com.gestioncontenido.dto.UbicacionDTO;
 import com.gestioncontenido.entity.Ubicacion;
 import com.gestioncontenido.repository.UbicacionRepository;
 import com.gestioncontenido.service.UbicacionService;
+import com.gestioncontenido.exception.ResourceNotFoundException;
+import com.gestioncontenido.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,15 @@ public class UbicacionServiceImpl implements UbicacionService {
 
     @Override
     public UbicacionDTO actualizarUbicacion(Long id, UbicacionDTO dto) {
+        if (dto.getNombre() == null || dto.getNombre().trim().isEmpty() ||
+            dto.getDescripcion() == null || dto.getDescripcion().trim().isEmpty() ||
+            dto.getCobertura() == null || dto.getCobertura().trim().isEmpty()) {
+            throw new BadRequestException("Todos los campos deben estar completos.");
+        }
+
         Ubicacion ubicacion = ubicacionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ubicación no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Ubicación no encontrada"));
+
         ubicacion.setNombre(dto.getNombre());
         ubicacion.setDescripcion(dto.getDescripcion());
         ubicacion.setCobertura(dto.getCobertura());

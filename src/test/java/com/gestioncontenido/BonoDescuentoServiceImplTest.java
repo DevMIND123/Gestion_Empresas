@@ -8,6 +8,7 @@ import com.gestioncontenido.dto.BonoDescuentoDTO;
 import com.gestioncontenido.entity.BonoDescuento;
 import com.gestioncontenido.repository.BonoDescuentoRepository;
 import com.gestioncontenido.service.impl.BonoDescuentoServiceImpl;
+import com.gestioncontenido.exception.ResourceNotFoundException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -100,7 +101,7 @@ public class BonoDescuentoServiceImplTest {
         when(bonoRepository.findById(id)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(RuntimeException.class, () -> bonoService.editar(id, dto));
+        assertThrows(ResourceNotFoundException.class, () -> bonoService.editar(id, dto));
         verify(bonoRepository, times(1)).findById(id);
         verify(bonoRepository, never()).save(any());
     }

@@ -8,6 +8,8 @@ import com.gestioncontenido.dto.FaqDTO;
 import com.gestioncontenido.entity.Faq;
 import com.gestioncontenido.repository.FaqRepository;
 import com.gestioncontenido.service.impl.FaqServiceImpl;
+import com.gestioncontenido.exception.ResourceNotFoundException;
+import com.gestioncontenido.exception.BadRequestException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,7 +85,7 @@ public class FaqServiceImplTest {
         faqDTO.setPregunta("");
 
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> faqService.crear(faqDTO));
+        assertThrows(BadRequestException.class, () -> faqService.crear(faqDTO));
         verify(faqRepository, never()).save(any());
     }
 
@@ -108,7 +110,7 @@ public class FaqServiceImplTest {
         when(faqRepository.findById(99L)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(RuntimeException.class, () -> faqService.editar(99L, faqDTO));
+        assertThrows(ResourceNotFoundException.class, () -> faqService.editar(99L, faqDTO));
         verify(faqRepository, never()).save(any());
     }
 

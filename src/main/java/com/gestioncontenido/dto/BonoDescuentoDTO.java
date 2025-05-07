@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class BonoDescuentoDTO {
     private Long id;
     private String nombre;
-    private double valor;
+    private Double valor;
     private LocalDate fechaExpiracion;
     private boolean isActive;
     private LocalDateTime createdAt;

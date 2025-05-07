@@ -115,7 +115,6 @@ public class PromocionServiceImplTest {
                 .build();
 
         when(promocionRepository.findById(id)).thenReturn(Optional.empty());
-
         ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
             promocionService.editar(id, dto);
         });

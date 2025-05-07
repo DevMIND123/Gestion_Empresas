@@ -31,7 +31,8 @@ public class PrecioMembresiaServiceImplTest {
     @Test
     void testListar() {
         PrecioMembresia entidad = PrecioMembresia.builder()
-                .id(1L).tipo("Premium").precio(29.99D).descripcion("Acceso completo").build();
+                .id(1L).tipo("Premium").precio(29.99).descripcion("Acceso completo").build();
+
         when(repository.findAll()).thenReturn(List.of(entidad));
 
         List<PrecioMembresiaDTO> resultado = service.listar();
@@ -43,10 +44,11 @@ public class PrecioMembresiaServiceImplTest {
     @Test
     void testCrear() {
         PrecioMembresiaDTO dto = PrecioMembresiaDTO.builder()
-                .tipo("Básico").precio(9.99D).descripcion("Acceso limitado").build();
+                .tipo("Básico").precio(9.99).descripcion("Acceso limitado").build();
 
         PrecioMembresia entidadGuardada = PrecioMembresia.builder()
-                .id(1L).tipo("Básico").precio(9.99D).descripcion("Acceso limitado").build();
+                .id(1L).tipo("Básico").precio(9.99).descripcion("Acceso limitado").build();
+
 
         when(repository.save(any(PrecioMembresia.class))).thenReturn(entidadGuardada);
 
@@ -82,6 +84,7 @@ public class PrecioMembresiaServiceImplTest {
                 .tipo("X").precio(0.0).descripcion("X").build();
 
         when(repository.findById(id)).thenReturn(Optional.empty());
+
 
         ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class, () -> service.editar(id, dto));
         assertEquals("Precio no encontrado", ex.getMessage());

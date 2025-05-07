@@ -13,7 +13,7 @@ public class PromocionDTO {
     private Long id;
     private String nombre;
     private String descripcion;
-    private double porcentajeDescuento;
+    private Double porcentajeDescuento;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private boolean isActive;

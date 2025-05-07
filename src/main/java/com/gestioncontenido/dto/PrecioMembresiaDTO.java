@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class PrecioMembresiaDTO {
     private Long id;
     private String tipo;
-    private double precio;
+    private Double precio;
     private String descripcion;
     private LocalDateTime createdAt;
 }
